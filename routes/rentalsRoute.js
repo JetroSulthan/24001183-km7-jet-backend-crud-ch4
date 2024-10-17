@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const rentalController = require("../controller/rentalController");
+const rentalController = require("../controllers/rentalController");
 
 //Route disini
 
