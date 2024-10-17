@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 app.get("/", async (req, res) => {
     try {
         await sequelize.authenticate();
-        res.status(200).sendFile(path.join(__dirname, 'views', 'index.html'));
+        res.status(200).sendFile(path.join(__dirname, 'views', 'welcome.html'));
     } catch (error) {
         res.status(500).sendFile(path.join(__dirname, 'views/errors', '500.html'));
     }
