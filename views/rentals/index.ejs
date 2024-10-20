@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Daftar Rental</h5>
+        <table id="rentalsTable" class="table datatable datatable-table">
+            <thead>
+                <tr>
+                    <th>Nama Penyewa</th>
+                    <th>Mobil</th>
+                    <th>No Plat</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rentals.forEach(rental => { %>
+                    <tr>
+                        <td><%= rental.User.name %></td>
+                        <td><%= rental.Car.model %></td>
+                        <td><%= rental.Car.no_plat %></td>
+                        <td>
+                            <span class="badge 
+                        <%= rental.status === 'completed' ? 'bg-success' : '' %>
+                        <%= rental.status === 'in progress' ? 'bg-warning' : '' %>
+                        <%= rental.status === 'canceled' ? 'bg-danger' : '' %>">
+                        <%= rental.status %>
+                        </span>
+                        </td>
+                        <td>
+                            <a href="/dashboard/rentals/<%= rental.id %>" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i> Lihat
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
