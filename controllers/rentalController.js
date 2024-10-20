@@ -9,18 +9,16 @@ const getAllRentals = async (req, res) => {
                 { model: User, attributes: ['name', 'email']},
                 { model: Car, attributes: ['model', 'no_plat']},
                 { model: Review, attributes: ['rating', 'komentar']},
-            ]
+            ],
+            order: [['id', 'DESC']],
         });
 
-        res.status(200).json({
-            status: "success",
-            message: "Rental data fetched successfully",
-            data: rentals,
-        });
-        console.log(rentals);
-
-        // TO DO : KEMBALIKAN DATA KE view index rentals
-        // res.render("rentals/index", { layout: 'layout' });
+        res.render("rentals/index", { layout: 'layout', rentals });
+        // res.status(200).json({
+        //     status: "success",
+        //     message: "Rental data fetched successfully",
+        //     data: rentals,
+        // });
     } catch (error) {
         res.status(500).json({
             status: "fail",
