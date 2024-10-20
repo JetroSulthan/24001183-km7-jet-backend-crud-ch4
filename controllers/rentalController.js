@@ -59,13 +59,8 @@ const getRentalById = async (req, res) => {
                 message: "Rental not found",
             });
         }
-        res.status(200).json({
-            status: "success",
-            message: `Data rental fetched successfully`,
-            data: rental
-        });
 
-        // res.render("rentals/detail", { layout: 'layout', rental });
+        res.render("rentals/details", { layout: 'layout', rental });
 
     } catch (error) {
         res.status(500).json({

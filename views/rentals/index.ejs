@@ -4,7 +4,8 @@
         <table id="rentalsTable" class="table datatable datatable-table">
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Nama Penyewa</th>
+                    <th>Mobil</th>
                     <th>No Plat</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -14,10 +15,18 @@
                 <% rentals.forEach(rental => { %>
                     <tr>
                         <td><%= rental.User.name %></td>
+                        <td><%= rental.Car.model %></td>
                         <td><%= rental.Car.no_plat %></td>
-                        <td><%= rental.status %></td>
                         <td>
-                            <a href="/dashboard/users/<%= rental.id %>" class="btn btn-info btn-sm">
+                            <span class="badge 
+                        <%= rental.status === 'completed' ? 'bg-success' : '' %>
+                        <%= rental.status === 'in progress' ? 'bg-warning' : '' %>
+                        <%= rental.status === 'canceled' ? 'bg-danger' : '' %>">
+                        <%= rental.status %>
+                        </span>
+                        </td>
+                        <td>
+                            <a href="/dashboard/rentals/<%= rental.id %>" class="btn btn-primary btn-sm">
                                 <i class="fas fa-eye"></i> Lihat
                             </a>
                         </td>
