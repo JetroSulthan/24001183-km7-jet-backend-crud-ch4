@@ -3,16 +3,16 @@ const imagekit = require("../lib/imagekit");
 
 async function readAllUsers(req, res) {
   try {
-      const users = await User.findAll();
-      res.render('admin/userList', { users });
+    const users = await User.findAll();
+    res.render('admin/userList', { users });
   } catch (error) {
-      console.error(error);
-      res.status(500).json({
-          status: "Failed",
-          message: "Failed to get users data",
-          isSuccess: false,
-          error: error.message
-      });
+    console.error(error);
+    res.status(500).render('errors/500', {
+      status: "Failed",
+      message: "Failed to get users data",
+      isSuccess: false,
+      error: error.message
+    });
   }
 }
 
