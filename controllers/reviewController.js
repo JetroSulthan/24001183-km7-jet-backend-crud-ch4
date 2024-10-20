@@ -6,7 +6,7 @@ const getReviews = async (req, res) => {
     try{
         const reviews = await Review.findAll()
         console.log(reviews)
-        res.render("/dashboard", {
+        res.render("reviews/index", {
             title: "Reviews",
             reviews
         })
