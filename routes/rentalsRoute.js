@@ -4,5 +4,5 @@ const rentalController = require("../controllers/rentalController");
 
 //Route disini
 router.get("/", rentalController.getAllRentals);
-// router.get("/:id", rentalController.getById);
+router.get("/:id", rentalController.getRentalById);
 module.exports = router;
