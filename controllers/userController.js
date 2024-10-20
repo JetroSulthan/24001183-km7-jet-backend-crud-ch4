@@ -1,6 +1,21 @@
 const { User } = require("../models");
 const imagekit = require("../lib/imagekit");
 
+async function readAllUsers(req, res) {
+  try {
+      const users = await User.findAll();
+      res.render('admin/userList', { users });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({
+          status: "Failed",
+          message: "Failed to get users data",
+          isSuccess: false,
+          error: error.message
+      });
+  }
+}
+
 const createUser = async (req, res) => {
   const { name, email, password, phone, alamat, role } = req.body;
 
@@ -98,6 +113,7 @@ const updateUser = async (req, res) => {
 };
 
 module.exports = {
+  readAllUsers,
   createUser,
   updateUser,
 };
