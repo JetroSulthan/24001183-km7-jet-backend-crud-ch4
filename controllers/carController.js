@@ -24,12 +24,7 @@ async function createCar(req, res) {
         })
 
         if (!uploadedImage) {
-            return res.status(400).json({
-                status: "Fail",
-                message: "Fail to upload image",
-                isSuccess: false,
-                data: null,
-            });
+            return res.status(400).sendFile(path.join(__dirname, "../views/errors", "400.html"));
         }
 
         const newCar = await Car.create({
@@ -41,21 +36,9 @@ async function createCar(req, res) {
             foto_mobil: uploadedImage.url
         });
         res.redirect("/dashboard/cars")
-        // res.status(200).json({
-        //     status: "Success",
-        //     message: "Successfully added car data",
-        //     isSuccess: true,
-        //     data: { newCar, foto_mobil: uploadedImage.url },
-        // });
-
     } 
     catch (error) {
-        res.status(500).json({
-            status: "Fail",
-            message: error.message,
-            isSuccess: false,
-            data: null,
-        });
+        res.status(500).sendFile(path.join(__dirname, "../views/errors", "500.html"));
     }
 }
 
