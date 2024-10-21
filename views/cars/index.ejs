@@ -1,0 +1,56 @@
+<div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fs-4">Table Cars</h5>
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Model</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Harga</th>
+                                    <th scope="col">Foto</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% cars.forEach(function(car) { %>
+                                    <tr>
+                                        <td>
+                                            <%= car.model %>
+                                        </td>
+                                        <td>
+                                            <%= car.status %>
+                                        </td>
+                                        <td>
+                                            <%= car.harga %>
+                                        </td>
+                                        <td><img src="<%= car.foto_mobil %>" alt="Car Image" width="100"></td>
+                                        <td>
+                                            <a href="/dashboard/cars/detail/<%= car.id %>">
+                                                <button class="btn btn-primary">View</button>
+                                            </a>
+                                            <a href="/dashboard/cars/edit/<%= car.id %>">
+                                                <button class="btn btn-warning">Edit</button>
+                                            </a>
+                                            <a href="/dashboard/cars/delete/<%= car.id %>">
+                                                <button class="btn btn-danger">Delete</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                        </table>
+                        <a href="/dashboard/cars/create">
+                            <button class="mt-4 btn btn-primary">Create Cars</button>
+                        </a>
+                        <!-- End Table with stripped rows -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div><!-- End #main -->
