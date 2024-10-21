@@ -1,0 +1,21 @@
+<div class="container card px-5  p-5">
+    <div class="d-flex justify-content-around card-body">
+        <div>
+            <img src="<%= car.foto_mobil %>" alt="Car Image" style="width: 100%;">
+        </div>
+        <div>
+            <h2>Detail Mobil</h2>
+            <p>Model: <%= car.model %>
+            </p>
+            <p>Status: <%= car.status %>
+            </p>
+            <p>Harga: <%= car.harga %>
+            </p>
+        </div>
+    </div>
+    <div>
+        <a href="/dashboard/cars">
+            <button class="btn btn-primary mt-3">Back to Cars List</button>
+        </a>
+    </div>
+</div>
