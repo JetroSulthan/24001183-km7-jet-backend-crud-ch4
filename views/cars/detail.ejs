@@ -1,0 +1,38 @@
+<div class="container card p-4">
+    <div class="gap-5 align-items-center d-flex">
+        <div class="col-md-6">
+            <img src="<%= car.foto_mobil %>" alt="Car Image" style="width: 100%; border-radius: 10px; transition: transform 0.5s ease-in-out; 
+                        display: inline-block;" onmouseover="this.style.transform='rotate(360deg)'"
+                onmouseout="this.style.transform='rotate(0deg)'">
+        </div>
+
+        <div class="col-md-6 px-5">
+            <h2 class="fw-bold text-primary mb-4">Detail Mobil</h2>
+            <p><b>Model: </b>
+                <%= car.model %>
+            </p>
+            <p><b>Tahun: </b>
+                <%= car.tahun %>
+            </p>
+            <p><b>No plate: </b>
+                <%= car.no_plat %>
+            </p>
+            <p><b>Status: </b>
+                <%= car.status %>
+            </p>
+            <p>
+                <b>Harga: </b>
+                <span class="text-success fw-semibold">
+                    Rp <%= car.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %>
+                </span>
+            </p>
+            
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/dashboard/cars">
+            <button class="btn btn-primary shadow-sm">Back to Cars List</button>
+        </a>
+    </div>
+</div>
