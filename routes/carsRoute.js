@@ -7,6 +7,7 @@ const upload = require("../middleware/uploader");
 router.get("/", carController.getAllCars);
 router.get("/detail/:id", carController.getCarbyId);
 router.get("/create", carController.createPage);
+router.get("/delete/:id", carController.deleteCar);
 router.post("/", upload.single("foto_mobil"), carController.createCar);
 
 module.exports = router;
