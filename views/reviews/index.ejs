@@ -1,7 +1,7 @@
 <div>
-    <h3>Reviews</h3>
+    <h3 class="mb-3">Reviews</h3>
     
-    <table class="table table-bordered">
+    <table class="table table-bordered mb-5">
         <thead>
             <tr>
                 <th class="text-center">Id</th>
@@ -28,17 +28,15 @@
                         <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                     </td>
                     <td class="text-center">
-                        <a class="btn btn-warning" href="">
-                            <img src="/images/update-icon.svg">
-                        </a>
-                        <a class="btn btn-danger" href="">
-                            <img src="/images/delete-icon.svg">
-                        </a>
+                        <a class="btn btn-warning ri-file-edit-line" href="">edit</a>
+                        <a class="btn btn-danger ri-delete-bin-2-line" href="">delete</a>
                     </td>
                 </tr>
                 <% }) %>
             </tbody>
             
-        </table>  
+        </table>
+
+        <a class="btn btn-primary ri-file-add-line" href=""> Create new review</a>
         
 </div>
