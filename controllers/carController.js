@@ -128,6 +128,31 @@ async function deleteCar(req, res) {
     });
   }
 }
+async function deleteCar(req, res) {
+  try {
+    const id = req.params.id;
+    const car = await Car.findByPk(id);
+
+    if (!car) {
+      return res.status(404).json({
+        status: "Fail",
+        message: "Car not found",
+        isSuccess: false,
+        data: null,
+      });
+    }
+    await car.destroy();
+
+    res.redirect("/dashboard/cars");
+  } catch (error) {
+    return res.status(500).json({
+      status: "Fail",
+      message: error.message,
+      isSuccess: false,
+      data: null,
+    });
+  }
+}
 
 module.exports = {
   createPage,
