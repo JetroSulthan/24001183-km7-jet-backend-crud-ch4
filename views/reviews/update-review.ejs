@@ -1,0 +1,31 @@
+<div class="col-lg">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Review Form</h5>
+            <form action="/dashboard/reviews/update-review/<%= review.id %>" method="POST">
+                <input type="hidden" name="review_id" value="<%= review.id %>">
+                <div class="row mb-3">
+                    <label for="rental" class="col-sm-2 col-form-label">Rental</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="rental_id" name="rental_id" value="<%= review.rental_id %>" placeholder="Rental ID" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="rating" class="col-sm-2 col-form-label">Rating Review</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="rating" name="rating" value="<%= review.rating %>" placeholder="Rating Review" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="komentar" class="col-sm-2 col-form-label">Komentar</label>
+                    <div class="col-sm-10">
+                        <textarea id="komentar" name="komentar" placeholder="Tuliskan Komentar Anda" class="form-control" style="height: 100px"><%= review.komentar %></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <button type="submit" class="btn btn-primary">Send Review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
