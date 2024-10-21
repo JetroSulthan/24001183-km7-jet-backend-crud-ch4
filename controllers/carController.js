@@ -6,10 +6,8 @@ async function getCarbyId(req, res) {
   try {
     // Mendapatkan id dari parameter URL
     const id = req.params.id;
-
     // Mencari mobil berdasarkan ID menggunakan findByPk
     const car = await Car.findByPk(id); // Atau bisa gunakan findOne({ where: { id } })
-
     // Jika mobil tidak ditemukan
     if (!car) {
       return res.status(404).json({
@@ -68,14 +66,10 @@ async function createCar(req, res) {
       file: file.buffer,
       fileName: `${split[0]}-${Date.now()}.${ext}`,
     });
-
     if (!uploadedImage) {
-      return res.status(400).json({
-        status: "Fail",
-        message: "Fail to upload image",
-        isSuccess: false,
-        data: null,
-      });
+      return res
+        .status(400)
+        .sendFile(path.join(__dirname, "../views/errors", "400.html"));
     }
 
     const newCar = await Car.create({
@@ -87,19 +81,10 @@ async function createCar(req, res) {
       foto_mobil: uploadedImage.url,
     });
     res.redirect("/dashboard/cars");
-    // res.status(200).json({
-    //     status: "Success",
-    //     message: "Successfully added car data",
-    //     isSuccess: true,
-    //     data: { newCar, foto_mobil: uploadedImage.url },
-    // });
   } catch (error) {
-    res.status(500).json({
-      status: "Fail",
-      message: error.message,
-      isSuccess: false,
-      data: null,
-    });
+    res
+      .status(500)
+      .sendFile(path.join(__dirname, "../views/errors", "500.html"));
   }
 }
 
@@ -128,32 +113,6 @@ async function deleteCar(req, res) {
     });
   }
 }
-async function deleteCar(req, res) {
-  try {
-    const id = req.params.id;
-    const car = await Car.findByPk(id);
-
-    if (!car) {
-      return res.status(404).json({
-        status: "Fail",
-        message: "Car not found",
-        isSuccess: false,
-        data: null,
-      });
-    }
-    await car.destroy();
-
-    res.redirect("/dashboard/cars");
-  } catch (error) {
-    return res.status(500).json({
-      status: "Fail",
-      message: error.message,
-      isSuccess: false,
-      data: null,
-    });
-  }
-}
-
 module.exports = {
   createPage,
   createCar,

@@ -1,6 +1,5 @@
 const { Review } = require("../models");
-
-console.log(Review)
+const { Rental } = require("../models");
 
 const getReviews = async (req, res) => {
     try{
@@ -18,6 +17,77 @@ const getReviews = async (req, res) => {
     }
 };
 
+async function createReview(req, res) {
+    const { rental_id, rating, komentar, tgl_review } = req.body;
+    try {
+        const newReview = {
+            rental_id,
+            rating,
+            komentar,
+            tgl_review: tgl_review || new Date()
+        };
+        await Review.create(newReview)
+        res.redirect("/dashboard/reviews");
+    } catch (error) {
+        res.status(500).json({
+            status: "Failed",
+            message: error.message,
+            isSuccess: false
+        });
+    }
+};
+
+async function createPage(req, res) {
+    try {
+        const rentals = await Rental.findAll();
+        res.render("reviews/create-review", { layout: 'layout', rentals});
+    } catch (error) {
+        res.status(500).json({
+            status: "Failed",
+            message: error.message,
+            isSuccess: false
+        });
+    }
+};
+
+async function updateReview(req, res) {
+    const { rating, komentar, tgl_review } = req.body;
+    const { id } = req.params;
+    try {
+        const review = await Review.findByPk(id);
+        review.rating = rating;
+        review.komentar = komentar;
+        review.tgl_review = tgl_review || new Date();
+        await review.save();
+        res.redirect(`/dashboard/reviews`);
+    } catch (error) {
+        res.status(500).json({
+            status: "Failed",
+            message: error.message,
+            isSuccess: false
+        });
+    }
+};
+
+async function updatePage(req, res) {
+    try {
+        const { id } = req.params;
+        const review = await Review.findByPk(id);
+        const rentals = await Rental.findAll();
+        res.render("reviews/update-review", { layout: 'layout', review, rentals });
+    } catch (error) {
+        res.status(500).json({
+            status: "Failed",
+            message: error.message,
+            isSuccess: false
+        });
+    }
+};
+
 module.exports = {
     getReviews,
+    createReview,
+    createPage,
+    updateReview,
+    updatePage
 };
