@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const imagekit = require("../lib/imagekit");
 
+
 async function readAllUsers(req, res) {
   try {
     const users = await User.findAll();
@@ -15,6 +16,15 @@ async function readAllUsers(req, res) {
     });
   }
 }
+=======
+const createPage = (req, res) => {
+  try {
+    res.render("users/create", { layout: "layout" });
+  } catch (error) {
+    res.render("errors/404", { layout: "layout" });
+  }
+};
+
 
 const createUser = async (req, res) => {
   const { name, email, password, phone, alamat, role } = req.body;
@@ -48,12 +58,35 @@ const createUser = async (req, res) => {
       message: "User created successfully",
       data: user,
     });
+
+    // res.redirect("/dashboard/users");
   } catch (error) {
     console.log(error);
     res.status(500).json({
       status: "error",
       message: error.message,
     });
+  }
+};
+
+const editPage = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+
+    console.log(`Fetching user : ${user}`);
+
+    if (!user) {
+      return res.status(404).render("errors/404", { layout: "layout" });
+    }
+
+    res.render("users/edit", { layout: "layout" });
+  } catch (error) {
+    res.render("errors/404", { layout: "layout" });
   }
 };
 
@@ -104,6 +137,8 @@ const updateUser = async (req, res) => {
       message: "User updated successfully",
       data: updatedUser,
     });
+
+    // res.redirect("/dashboard/users");
   } catch (error) {
     res.status(500).json({
       status: "error",
@@ -114,6 +149,8 @@ const updateUser = async (req, res) => {
 
 module.exports = {
   readAllUsers,
+  editPage,
+  createPage,
   createUser,
   updateUser,
 };

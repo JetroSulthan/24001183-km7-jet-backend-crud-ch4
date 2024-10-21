@@ -1,0 +1,125 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <!-- Card -->
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-body p-5">
+          <div class="text-center mb-5">
+            <h5 class="card-title">Edit User</h5>
+            <p class="card-text">Update the user information below!</p>
+          </div>
+
+          <!-- Form -->
+          <form
+            action="/dashboard/users/update/<%= user.id %>"  <!-- Make sure to set the correct update endpoint -->
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <!-- Name -->
+            <div class="form-group mb-4">
+              <label for="name" class="form-label">Your Name</label>
+              <input
+                type="text"
+                class="form-control form-control-lg shadow-sm"
+                id="name"
+                name="name"
+                value="<%= user.name %>"  <!-- Pre-fill with current user data -->
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group mb-4">
+              <label for="email" class="form-label">Your Email</label>
+              <input
+                type="email"
+                class="form-control form-control-lg shadow-sm"
+                id="email"
+                name="email"
+                value="<%= user.email %>"  <!-- Pre-fill with current user data -->
+                placeholder="example@site.com"
+                required
+              />
+            </div>
+
+            <!-- Password -->
+            <div class="form-group mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control form-control-lg shadow-sm"
+                id="password"
+                name="password"
+                placeholder="Enter your password (leave blank to keep current password)"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group mb-4">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control form-control-lg shadow-sm"
+                id="phone"
+                name="phone"
+                value="<%= user.phone %>"  <!-- Pre-fill with current user data -->
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+
+            <!-- Address -->
+            <div class="form-group mb-4">
+              <label for="alamat" class="form-label">Address</label>
+              <input
+                type="text"
+                class="form-control form-control-lg shadow-sm"
+                id="alamat"
+                name="alamat"
+                value="<%= user.alamat %>"  <!-- Pre-fill with current user data -->
+                placeholder="Enter your address"
+                required
+              />
+            </div>
+
+            <!-- Role -->
+            <div class="form-group mb-4">
+              <label for="role" class="form-label">Role</label>
+              <select
+                class="form-select form-control-lg shadow-sm"
+                id="role"
+                name="role"
+                required
+              >
+                <option value="" disabled>Select a role</option>
+                <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin</option>
+                <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>User</option>
+              </select>
+            </div>
+
+            <!-- Profile Picture Upload -->
+            <div class="form-group mb-4">
+              <label for="foto_profil" class="form-label">Upload Profile Picture</label>
+              <input
+                type="file"
+                class="form-control form-control-lg shadow-sm"
+                id="foto_profil"
+                name="foto_profil"
+                accept="image/*"
+              />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg shadow">
+                Update User
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Card -->
+    </div>
+  </div>
+</div>

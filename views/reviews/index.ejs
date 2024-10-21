@@ -1,0 +1,42 @@
+<div>
+    <h3 class="mb-3">Reviews</h3>
+    
+    <table class="table table-bordered mb-5">
+        <thead>
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Komentar</th>
+                <th class="text-center">Rating</th>
+                <th class="text-center">Tanggal Review</th>
+                <th class="text-center">Aksi</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% reviews.map((review) => { %>
+                <tr>
+                    <td class="text-center">
+                        <%= review.id %>
+                    </td>
+                    <td>
+                        <%= review.komentar %>
+                    </td>
+                    <td class="text-center">
+                        <%= review.rating %>
+                    </td>
+                    <td class="text-center">
+                        <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-warning ri-file-edit-line" href="">edit</a>
+                        <a class="btn btn-danger ri-delete-bin-2-line" href="">delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+            
+        </table>
+
+        <a class="btn btn-primary ri-file-add-line" href=""> Create new review</a>
+        
+</div>
