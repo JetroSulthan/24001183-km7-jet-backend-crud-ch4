@@ -36,11 +36,11 @@
                 <input type="number" min="0" id="total_harga" name="total_harga" placeholder="Total Harga">
             </div>
 
-            <input type="hidden" value="selesai" name="status">
+            <input type="hidden" value="aktif" name="status">
 
             <button type="submit">Rent Car</button>
         </form>
     <% } else { %>
         <p>No cars are available for rental at the moment.</p>
+    <% } %>
 </div>
-<% } %>

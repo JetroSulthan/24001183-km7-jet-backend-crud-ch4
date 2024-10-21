@@ -19,8 +19,8 @@
                         <td><%= rental.Car.no_plat %></td>
                         <td>
                             <span class="badge 
-                        <%= rental.status === 'completed' ? 'bg-success' : '' %>
-                        <%= rental.status === 'in progress' ? 'bg-warning' : '' %>
+                        <%= rental.status === 'selesai' ? 'bg-success' : '' %>
+                        <%= rental.status === 'aktif' ? 'bg-warning' : '' %>
                         <%= rental.status === 'canceled' ? 'bg-danger' : '' %>">
                         <%= rental.status %>
                         </span>
