@@ -1,6 +1,16 @@
 const { Car } = require("../models");
 const imagekit = require("../lib/imagekit");
 
+
+async function createPage(req, res) {
+    try {
+        res.render("cars/create")    
+    } 
+    catch (error) {
+        res.status(404).sendFile(path.join(__dirname, "../views/errors", "404.html"));
+    }
+}
+
 async function createCar(req, res) {
     try {
         const file = req.file;
@@ -30,12 +40,14 @@ async function createCar(req, res) {
             harga, 
             foto_mobil: uploadedImage.url
         });
-        res.status(200).json({
-            status: "Success",
-            message: "Successfully added car data",
-            isSuccess: true,
-            data: { newCar, foto_mobil: uploadedImage.url },
-        });
+        res.redirect("/dashboard/cars")
+        // res.status(200).json({
+        //     status: "Success",
+        //     message: "Successfully added car data",
+        //     isSuccess: true,
+        //     data: { newCar, foto_mobil: uploadedImage.url },
+        // });
+
     } 
     catch (error) {
         res.status(500).json({
@@ -48,5 +60,6 @@ async function createCar(req, res) {
 }
 
 module.exports = {
+    createPage,
     createCar,
 };
