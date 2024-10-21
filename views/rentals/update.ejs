@@ -1,0 +1,48 @@
+<div class="container">
+    <h1 class="mt-4">Update Rental Information</h1>
+    
+    <!-- Display error or success messages -->
+    <!-- <% if (typeof message !== 'undefined') { %>
+        <div class="alert <%= isSuccess ? 'alert-success' : 'alert-danger' %>" role="alert">
+            <%= message %>
+        </div>
+    <% } %> -->
+
+    <!-- Rental Update Form -->
+    <form action="/dashboard/rentals/update/<%= rental.id %>" method="POST">
+        <div class="mb-3">
+            <label for="car_id" class="form-label">Car ID</label>
+            <input type="text" class="form-control" id="car_id" name="car_id" value="<%= rental.car_id %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="user_id" class="form-label">User ID</label>
+            <input type="text" class="form-control" id="user_id" name="user_id" value="<%= rental.user_id %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="tgl_peminjaman" class="form-label">Rental Date</label>
+            <input type="date" class="form-control" id="tgl_peminjaman" name="tgl_peminjaman" value="<%= rental.tgl_peminjaman.toISOString().split('T')[0] %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="tgl_pengembalian" class="form-label">Return Date</label>
+            <input type="date" class="form-control" id="tgl_pengembalian" name="tgl_pengembalian" value="<%= rental.tgl_pengembalian.toISOString().split('T')[0] %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="total_harga" class="form-label">Total Price</label>
+            <input type="number" class="form-control" id="total_harga" name="total_harga" value="<%= rental.total_harga %>" min="0">
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-control" id="status" name="status">
+                <option value="aktif" <%= rental.status === 'aktif' ? 'selected' : '' %>>Aktif</option>
+                <option value="selesai" <%= rental.status === 'selesai' ? 'selected' : '' %>>Selesai</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Rental</button>
+    </form>
+</div>
