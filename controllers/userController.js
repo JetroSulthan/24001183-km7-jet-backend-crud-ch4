@@ -51,13 +51,7 @@ const createUser = async (req, res) => {
       foto_profil: req.body.foto_profil,
     });
 
-    res.status(201).json({
-      status: "success",
-      message: "User created successfully",
-      data: user,
-    });
-
-    // res.redirect("/dashboard/users");
+    res.redirect("/dashboard/users");
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -130,13 +124,7 @@ const updateUser = async (req, res) => {
       foto_profil: req.body.foto_profil,
     });
 
-    res.status(200).json({
-      status: "success",
-      message: "User updated successfully",
-      data: updatedUser,
-    });
-
-    // res.redirect("/dashboard/users");
+    res.redirect("/dashboard/users");
   } catch (error) {
     res.status(500).json({
       status: "error",
