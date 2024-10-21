@@ -17,6 +17,10 @@ document
             title: "Success!",
             text: "Your account has been created successfully!",
           }).then(() => {
+            form.reset();
+            const errorMessages = form.querySelectorAll(".invalid-feedback");
+            errorMessages.forEach((msg) => (msg.style.display = "none"));
+
             window.location.href = "/dashboard/users";
           });
         } else {

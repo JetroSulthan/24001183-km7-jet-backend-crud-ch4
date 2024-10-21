@@ -70,15 +70,13 @@ const editPage = async (req, res) => {
       },
     });
 
-    console.log(`Fetching user : ${user}`);
-
     if (!user) {
       return res.status(404).render("errors/404", { layout: "layout" });
     }
 
-    res.render("users/edit", { layout: "layout" });
+    res.render("users/edit", { user, layout: "layout" });
   } catch (error) {
-    res.render("errors/404", { layout: "layout" });
+    return res.status(500).render("errors/500", { layout: "layout" });
   }
 };
 
@@ -94,11 +92,7 @@ const updateUser = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({
-        status: "error",
-        message: "User not found",
-        data: null,
-      });
+      return res.status(404).render("errors/404", { layout: "layout" });
     }
 
     if (req.file) {
@@ -111,25 +105,28 @@ const updateUser = async (req, res) => {
         fileName: file.originalname,
         extension: ext,
       });
-      req.body.foto_profil = uploadedPhotoProfile.url;
+
+      if (!uploadedPhotoProfile) {
+        return res.status(400).render("errors/400", { layout: "layout" });
+      }
+
+      user.foto_profil = req.body.foto_profil;
+    }
+    user.name = name;
+    user.email = email;
+
+    if (password) {
+      user.password = password;
     }
 
-    const updatedUser = await user.update({
-      name,
-      email,
-      password,
-      phone,
-      alamat,
-      role,
-      foto_profil: req.body.foto_profil,
-    });
+    user.phone = phone;
+    user.alamat = alamat;
+    user.role = role;
 
+    await user.save();
     res.redirect("/dashboard/users");
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message,
-    });
+    res.status(500).render("errors/500", { layout: "layout" });
   }
 };
 
