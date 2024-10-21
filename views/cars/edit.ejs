@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Create Car</h5>
+
+      <!-- Vertical Form -->
+      <form class="row g-3" action="/dashboard/cars/edit/<%= detailCar.id %>" method="post" enctype="multipart/form-data">
+        <div class="col-12">
+          <label for="model" class="form-label">Model Car</label>
+          <input type="text" class="form-control" id="model" value="<%= detailCar.model %>" name="model">
+        </div>
+        <div class="col-12">
+          <label for="tahun" class="form-label">Year</label>
+          <input type="year" class="form-control" id="tahun" value="<%= detailCar.tahun %>"" name="tahun">
+        </div>
+        <div class="col-12">
+          <label for="no_plat" class="form-label">No Plate</label>
+          <input type="text" class="form-control" id="no_plat" value="<%= detailCar.no_plat %>" name="no_plat">
+        </div>
+        <div class="col-12">
+          <label for="status" class="form-label">Status</label>
+          <select class="form-control" id="status" name="status">
+            <option value="<%= detailCar.status %>"><%= detailCar.status %></option>
+            <option value="Tersedia">Tersedia</option>
+            <option value="Tidak Tersedia">Tidak Tersedia</option>
+          </select>
+        </div>
+        <div class="col-12">
+            <label for="harga" class="form-label">Harga</label>
+            <input type="bumber" class="form-control" id="harga" value="<%= detailCar.harga %>" name="harga">
+          </div>
+          <div class="col-12">
+            <label for="foto_mobil" class="form-label">File Foto</label>
+            <input type="FIle" class="form-control" id="foto_mobil" name="foto_mobil">
+          </div>
+        <div class="mt-5">
+          <button type="submit" class="btn btn-primary">Create Data</button>
+        </div>
+      </form><!-- Vertical Form -->
+
+    </div>
+  </div>

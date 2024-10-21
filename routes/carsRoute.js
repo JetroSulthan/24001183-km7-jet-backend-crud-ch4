@@ -6,7 +6,7 @@ const upload = require('../middleware/uploader');
 //Route disini
 router.get("/create", carController.createPage);
 router.post("/", upload.single("foto_mobil"), carController.createCar);
-
-router.patch("/:id", upload.single("foto_mobil"), carController.updateCar);
+router.get("/edit/:id", upload.single("foto_mobil"), carController.editPage);
+router.post("/edit/:id", upload.single("foto_mobil"), carController.updateCar);
 
 module.exports = router;

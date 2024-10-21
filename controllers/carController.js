@@ -2,6 +2,26 @@ const { Car } = require("../models");
 const imagekit = require("../lib/imagekit");
 const path = require("path");
 
+
+async function editPage(req, res) {
+    try {
+        const id = req.params.id;
+        const detailCar = await Car.findByPk(id);
+        if (!detailCar) {
+            return res.status(404).json({
+                status: "Fail",
+                message: "Can't find spesific car",
+                isSuccess: false,
+                data: null,
+            });
+        }    
+        res.render("cars/edit", {detailCar})    
+    } 
+    catch (error) {
+        res.status(404).sendFile(path.join(__dirname, "../views/errors", "404.html"));
+    }
+}
+
 async function updateCar(req, res) {
     try {
         const id = req.params.id;
@@ -19,6 +39,16 @@ async function updateCar(req, res) {
                 data: null,
             });
         }    
+
+        const uploadedImage = await imagekit.upload({
+            file : file.buffer,
+            fileName: `${split[0]}-${Date.now()}.${ext}`
+        })
+
+        if (!uploadedImage) {
+            return res.status(400).sendFile(path.join(__dirname, "../views/errors", "400.html"));
+        }
+
         detailCar.model = model, 
         detailCar.tahun = tahun, 
         detailCar.no_plat = no_plat, 
@@ -85,6 +115,7 @@ async function createCar(req, res) {
 }
 
 module.exports = {
+    editPage,
     updateCar,
     createPage,
     createCar,
