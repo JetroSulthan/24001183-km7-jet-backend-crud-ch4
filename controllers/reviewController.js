@@ -1,6 +1,22 @@
 const { Review } = require("../models");
 const { Rental } = require("../models");
 
+const getReviews = async (req, res) => {
+    try{
+        const reviews = await Review.findAll()
+        console.log(reviews)
+        res.render("reviews/index", {
+            title: "Reviews",
+            reviews
+        })
+    }
+    catch(error){
+        res.render('error', {
+            message: error.message,
+        })
+    }
+};
+
 async function createReview(req, res) {
     const { rental_id, rating, komentar, tgl_review } = req.body;
     try {
@@ -33,6 +49,7 @@ async function createPage(req, res) {
     }
 }
 module.exports = {
+    getReviews,
     createReview,
     createPage
 };
