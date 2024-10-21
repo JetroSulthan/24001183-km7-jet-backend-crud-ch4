@@ -4,6 +4,9 @@ const userController = require("../controllers/userController");
 const upload = require("../middleware/uploader");
 
 //Route disini
+
+router.get("/", userController.readAllUsers);
+router.post("/", upload.single("foto_profil"), userController.createUser);
 router.get("/create", userController.createPage);
 router.post("/create", upload.single("foto_profil"), userController.createUser);
 router.get("/edit/:id", userController.editPage);
