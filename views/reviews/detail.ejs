@@ -1,0 +1,10 @@
+<div class="card mx-5">
+    <div class="card-body">
+        <img src="<%= review.Rental.Car.foto_mobil %>" alt="" class="img-fluid" width="70%" >
+        <div class="card-title">Review for <%= review.Rental.Car.model %> by <%= review.Rental.User.name %></div>
+        <div class="card-text">Harga Sewa: <%= review.Rental.total_harga %></div>
+        <div class="card-text">Komentar Review: <%= review.komentar %></div>
+        <div class="card-text">Rating Review: <%= review.rating %></div>
+        <div class="card-text">Tanggal Review: <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %></div>
+    </div>
+</div>
