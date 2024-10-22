@@ -24,6 +24,36 @@ const createPage = (req, res) => {
   }
 };
 
+async function getUserbyId(req, res) {
+  try {
+    const id = req.params.id;
+
+    // Ambil data user berdasarkan ID
+    const user = await User.findByPk(id);
+
+    // Jika user tidak ditemukan
+    if (!user) {
+      return res.status(404).json({
+        status: "Fail",
+        message: "User not found",
+        isSuccess: false,
+        data: null,
+      });
+    }
+
+    // Render detail user tanpa cek role
+    res.render("users/detail", { user });
+  } catch (error) {
+    console.error(error); // Log kesalahan untuk debugging
+    res.status(500).json({
+      status: "Failed",
+      message: error.message,
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+
 const createUser = async (req, res) => {
   const { name, email, password, phone, alamat, role } = req.body;
 
@@ -136,4 +166,5 @@ module.exports = {
   createPage,
   createUser,
   updateUser,
+  getUserbyId,
 };
