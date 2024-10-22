@@ -1,10 +1,42 @@
-<div class="card mx-5">
-    <div class="card-body">
-        <img src="<%= review.Rental.Car.foto_mobil %>" alt="" class="img-fluid" width="70%" >
-        <div class="card-title">Review for <%= review.Rental.Car.model %> by <%= review.Rental.User.name %></div>
-        <div class="card-text">Harga Sewa: <%= review.Rental.total_harga %></div>
-        <div class="card-text">Komentar Review: <%= review.komentar %></div>
-        <div class="card-text">Rating Review: <%= review.rating %></div>
-        <div class="card-text">Tanggal Review: <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %></div>
+<div class="card my-5 border-0 shadow-lg rounded-4" style="background: #fff;">
+    <div class="row g-0">
+        <div class="col-md-4 d-flex align-items-center justify-content-center" style="background: #fff; border-top-left-radius: 1.5rem; border-bottom-left-radius: 1.5rem;">
+            <!-- Rounded car image with border -->
+            <img src="<%= review.Rental.Car.foto_mobil %>" alt="Car image" class="img-fluid p-3">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <!-- Review title with bold text -->
+                <h5 class="card-title fw-bold mb-0 pb-0">Review for <%= review.Rental.Car.model %></h5>
+
+                <p class="mt-0">by <%= review.Rental.User.name %></p>
+                
+                <!-- Text with subtle color -->
+                <p class="text-muted mb-1">Rental Information</p>
+                
+                <!-- Rental price with badge styled to be clean and modern -->
+                <p class="mb-2">
+                    <strong>Harga Sewa:</strong> 
+                    <span class="badge bg-success text-light">Rp <%= review.Rental.total_harga.toLocaleString('id-ID') %></span>
+                </p>
+                
+                <!-- Review comment -->
+                <p class="mb-2">
+                    <strong>Komentar Review:</strong> <%= review.komentar %>
+                </p>
+
+                <!-- Rating with star icon and a modern touch -->
+                <p class="mb-2">
+                    <strong>Rating Review:</strong> 
+                    <%= review.rating %> <i class="bi bi-star-fill text-warning"></i>
+                </p>
+
+                <!-- Date formatted nicely -->
+                <p class="mb-4">
+                    <strong>Tanggal Review:</strong> 
+                    <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                </p>
+            </div>
+        </div>
     </div>
 </div>

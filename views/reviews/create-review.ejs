@@ -7,8 +7,7 @@
                 <div class="row mb-3">
                     <label for="rental" class="col-sm-2 col-form-label">Rental</label>
                     <div class="col-sm-10">
-                    <select id="rental_id" name="rental_id" class="form-select" aria-label="Default select example">
-                        <option selected="">Select Rental</option>
+                    <select id="rental_id" name="rental_id" class="form-select" aria-label="Default select example" required>
                         <% for(var i=0; i < rentals.length; i++) { %>
                             <option value="<%= rentals[i].id %>"><%= rentals[i].id %></option>
                         <% } %>
@@ -18,13 +17,13 @@
                 <div class="row mb-3">
                     <label for="rating" class="col-sm-2 col-form-label">Rating Review</label>
                     <div class="col-sm-10">
-                        <input type="number" id="rating" name="rating" placeholder="Rating Review" class="form-control">
+                        <input type="number" min="1" max="5" id="rating" name="rating" placeholder="Rating Review" class="form-control" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="komentar" class="col-sm-2 col-form-label">Komentar</label>
                     <div class="col-sm-10">
-                        <textarea type="text" id="komentar" name="komentar" placeholder="Tuliskan Komentar Anda" class="form-control" style="height: 100px"></textarea>
+                        <textarea type="text" id="komentar" name="komentar" placeholder="Tuliskan Komentar Anda" class="form-control" style="height: 100px" required></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">

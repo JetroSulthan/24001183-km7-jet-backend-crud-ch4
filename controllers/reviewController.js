@@ -2,7 +2,9 @@ const { Review, Rental, Car, User } = require('../models');
 
 const getReviews = async (req, res) => {
     try{
-        const reviews = await Review.findAll()
+        const reviews = await Review.findAll({
+            order: [['id', 'ASC']]
+        })
         console.log(reviews)
         res.render("reviews/index", {
             title: "Reviews",
