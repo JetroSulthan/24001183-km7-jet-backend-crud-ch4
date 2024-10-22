@@ -115,48 +115,67 @@ const updateUser = async (req, res) => {
   const { name, email, password, phone, alamat, role } = req.body;
 
   try {
-    const user = await User.findOne({
-      where: {
-        id,
-      },
-    });
+    let user;
 
-    if (!user) {
-      return res.status(404).render("errors/404", { layout: "layout" });
-    }
-
-    if (req.file) {
-      const file = req.file;
-      const split = file.originalname.split(".");
-      const ext = split[split.length - 1];
-
-      const uploadedPhotoProfile = await imagekit.upload({
-        file: file.buffer,
-        fileName: file.originalname,
-        extension: ext,
+    if (id) {
+      user = await User.findOne({
+        where: {
+          id,
+        },
       });
 
-      if (!uploadedPhotoProfile) {
-        return res.status(400).render("errors/400", { layout: "layout" });
+      if (!user) {
+        return res.status(404).render("errors/404", { layout: "layout" });
       }
 
-      user.foto_profil = req.body.foto_profil;
+      if (req.file) {
+        const file = req.file;
+        const split = file.originalname.split(".");
+        const ext = split[split.length - 1];
+
+        const uploadedPhotoProfile = await imagekit.upload({
+          file: file.buffer,
+          fileName: file.originalname,
+          extension: ext,
+        });
+
+        if (!uploadedPhotoProfile) {
+          return res.status(400).render("errors/400", { layout: "layout" });
+        }
+
+        user.foto_profil = uploadedPhotoProfile.url;
+      }
+
+      user.name = name;
+      user.email = email;
+
+      if (password) {
+        user.password = password;
+      }
+
+      user.phone = phone;
+      user.alamat = alamat;
+      user.role = role;
+
+      await user.save();
+
+      res.redirect("/dashboard/users");
+    } else {
+      await User.create({
+        name,
+        email,
+        password,
+        phone,
+        alamat,
+        role,
+        foto_profil: req.file ? uploadedPhotoProfile.url : null,
+      });
+
+      res.redirect("/dashboard/users");
     }
-    user.name = name;
-    user.email = email;
-
-    if (password) {
-      user.password = password;
-    }
-
-    user.phone = phone;
-    user.alamat = alamat;
-    user.role = role;
-
-    await user.save();
-    res.redirect("/dashboard/users");
   } catch (error) {
-    res.status(500).render("errors/500", { layout: "layout" });
+    console.log(error);
+    return res.status(500).render("errors/500", { layout: "layout" });
   }
 };
 
