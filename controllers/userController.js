@@ -4,17 +4,18 @@ const imagekit = require("../lib/imagekit");
 async function readAllUsers(req, res) {
   try {
     const users = await User.findAll();
-    res.render('users', { users });
+    res.render("admin/userList", { users });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({
-      status: "Fail",
-      message: error.message,
+    res.status(500).render("errors/500", {
+      status: "Failed",
+      message: "Failed to get users data",
       isSuccess: false,
-      data: null,
+      error: error.message,
     });
   }
 }
+
 const createPage = (req, res) => {
   try {
     res.render("users/create", { layout: "layout" });
@@ -23,34 +24,33 @@ const createPage = (req, res) => {
   }
 };
 
-
 async function getUserbyId(req, res) {
   try {
-      const id = req.params.id;
+    const id = req.params.id;
 
-      // Ambil data user berdasarkan ID
-      const user = await User.findByPk(id);
+    // Ambil data user berdasarkan ID
+    const user = await User.findByPk(id);
 
-      // Jika user tidak ditemukan
-      if (!user) {
-        return res.status(404).json({
-          status: "Fail",
-          message: "User not found",
-          isSuccess: false,
-          data: null,
-        });
-      }
-
-      // Render detail user tanpa cek role
-      res.render('users/detail', { user }); 
-  } catch (error) {
-      console.error(error); // Log kesalahan untuk debugging
-      res.status(500).json({
-          status: "Failed",
-          message: error.message,
-          isSuccess: false,
-          error: error.message
+    // Jika user tidak ditemukan
+    if (!user) {
+      return res.status(404).json({
+        status: "Fail",
+        message: "User not found",
+        isSuccess: false,
+        data: null,
       });
+    }
+
+    // Render detail user tanpa cek role
+    res.render("users/detail", { user });
+  } catch (error) {
+    console.error(error); // Log kesalahan untuk debugging
+    res.status(500).json({
+      status: "Failed",
+      message: error.message,
+      isSuccess: false,
+      error: error.message,
+    });
   }
 }
 
@@ -81,13 +81,7 @@ const createUser = async (req, res) => {
       foto_profil: req.body.foto_profil,
     });
 
-    res.status(201).json({
-      status: "success",
-      message: "User created successfully",
-      data: user,
-    });
-
-    // res.redirect("/dashboard/users");
+    res.redirect("/dashboard/users");
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -106,15 +100,13 @@ const editPage = async (req, res) => {
       },
     });
 
-    console.log(`Fetching user : ${user}`);
-
     if (!user) {
       return res.status(404).render("errors/404", { layout: "layout" });
     }
 
-    res.render("users/edit", { layout: "layout" });
+    res.render("users/edit", { user, layout: "layout" });
   } catch (error) {
-    res.render("errors/404", { layout: "layout" });
+    return res.status(500).render("errors/500", { layout: "layout" });
   }
 };
 
@@ -130,11 +122,7 @@ const updateUser = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({
-        status: "error",
-        message: "User not found",
-        data: null,
-      });
+      return res.status(404).render("errors/404", { layout: "layout" });
     }
 
     if (req.file) {
@@ -147,31 +135,28 @@ const updateUser = async (req, res) => {
         fileName: file.originalname,
         extension: ext,
       });
-      req.body.foto_profil = uploadedPhotoProfile.url;
+
+      if (!uploadedPhotoProfile) {
+        return res.status(400).render("errors/400", { layout: "layout" });
+      }
+
+      user.foto_profil = req.body.foto_profil;
+    }
+    user.name = name;
+    user.email = email;
+
+    if (password) {
+      user.password = password;
     }
 
-    const updatedUser = await user.update({
-      name,
-      email,
-      password,
-      phone,
-      alamat,
-      role,
-      foto_profil: req.body.foto_profil,
-    });
+    user.phone = phone;
+    user.alamat = alamat;
+    user.role = role;
 
-    res.status(200).json({
-      status: "success",
-      message: "User updated successfully",
-      data: updatedUser,
-    });
-
-    // res.redirect("/dashboard/users");
+    await user.save();
+    res.redirect("/dashboard/users");
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message,
-    });
+    res.status(500).render("errors/500", { layout: "layout" });
   }
 };
 

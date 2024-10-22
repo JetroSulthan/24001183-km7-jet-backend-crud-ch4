@@ -6,16 +6,17 @@
         <div class="card-body p-5">
           <div class="text-center mb-5">
             <h5 class="card-title">Register New User</h5>
-            <p class="card-text">
+            <p class="card-text text-muted">
               Create your account and join our growing community!
             </p>
           </div>
 
           <!-- Form -->
           <form
-            action="/dashboard/user/create"
+            action="/dashboard/users/create"
             method="POST"
             enctype="multipart/form-data"
+            class="needs-validation"
           >
             <!-- Name -->
             <div class="form-group mb-4">
@@ -40,6 +41,7 @@
                 name="email"
                 placeholder="example@site.com"
                 required
+                autocomplete="email"
               />
             </div>
 
@@ -53,6 +55,7 @@
                 name="password"
                 placeholder="Enter your password"
                 required
+                autocomplete="new-password"
               />
             </div>
 
@@ -118,21 +121,9 @@
               </button>
             </div>
           </form>
-
-          <!-- Help Center Link -->
-          <div class="mt-4 text-center">
-            <span class="form-text">
-              Need help?
-              <a href="./page-help-center.html" class="link"
-                >Visit our Help Center</a
-              >
-            </span>
-          </div>
         </div>
       </div>
       <!-- End Card -->
     </div>
   </div>
 </div>
-
-<script src="/public/admin/js/createsuccess.js"></script>

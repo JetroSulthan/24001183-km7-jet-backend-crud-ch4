@@ -1,0 +1,60 @@
+<div >
+    <% if (cars.length > 0) { %>
+        <div class="container mt-5">
+            <h2 class="mb-4 text-center">Car Rental Form</h2>
+            <form action="/dashboard/rentals/create" method="POST" class="row g-3">
+                
+                <!-- Customer Selection -->
+                <div class="col-md-6">
+                    <label for="user" class="form-label">Customer</label>
+                    <select class="form-select" name="user_id" id="user" required>
+                        <option value="" disabled selected>Nama Customer</option>
+                        <% users.forEach(user => { %>
+                            <option value="<%= user.id %>"> <%= user.make %> <%= user.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+    
+                <!-- Car Selection -->
+                <div class="col-md-6">
+                    <label for="car" class="form-label">Mobil</label>
+                    <select class="form-select" name="car_id" id="car" required>
+                        <option value="" disabled selected>Pilih Mobil</option>
+                        <% cars.forEach(car => { %>
+                            <option value="<%= car.id %>"> <%= car.make %> <%= car.model %></option>
+                        <% }) %>
+                    </select>
+                </div>
+    
+                <!-- Tanggal Peminjaman -->
+                <div class="col-md-6">
+                    <label for="tgl_peminjaman" class="form-label">Tanggal Peminjaman</label>
+                    <input type="date" class="form-control" id="tgl_peminjaman" name="tgl_peminjaman" placeholder="Tanggal Peminjaman" required>
+                </div>
+    
+                <!-- Tanggal Pengembalian -->
+                <div class="col-md-6">
+                    <label for="tgl_pengembalian" class="form-label">Tanggal Pengembalian</label>
+                    <input type="date" class="form-control" id="tgl_pengembalian" name="tgl_pengembalian" placeholder="Tanggal Pengembalian" required>
+                </div>
+    
+                <!-- Total Harga -->
+                <div class="col-md-12">
+                    <label for="total_harga" class="form-label">Total Harga</label>
+                    <input type="number" class="form-control" min="0" id="total_harga" name="total_harga" placeholder="Total Harga" required>
+                </div>
+    
+                <!-- Status (hidden) -->
+                <input type="hidden" value="aktif" name="status">
+    
+                <!-- Submit Button -->
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary mt-3">Rent Car</button>
+                </div>
+            </form>
+        </div>
+    
+    <% } else { %>
+        <p>No cars are available for rental at the moment.</p>
+    <% } %>
+</div>
