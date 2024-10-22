@@ -1,7 +1,6 @@
 const { User } = require("../models");
 const imagekit = require("../lib/imagekit");
 
-
 async function readAllUsers(req, res) {
   try {
     const users = await User.findAll();
