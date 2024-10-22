@@ -84,10 +84,30 @@ async function updatePage(req, res) {
     }
 };
 
+const deleteReviews = async (req, res) => {
+    const id = req.params.id
+    try {
+        const review = await Review.findByPk(id)
+
+        if (!review) {
+            return res.status(404).send("Review not found")
+        }
+
+        await review.destroy()
+        res.redirect('/dashboard/reviews')
+    } catch (error) {
+        res.status(500).send({ 
+            message: error.message 
+        })
+    }
+}
+
+
 module.exports = {
     getReviews,
     createReview,
     createPage,
     updateReview,
-    updatePage
+    updatePage,
+    deleteReviews
 };
