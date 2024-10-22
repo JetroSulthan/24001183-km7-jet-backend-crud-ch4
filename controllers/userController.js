@@ -4,15 +4,45 @@ const imagekit = require("../lib/imagekit");
 async function readAllUsers(req, res) {
   try {
     const users = await User.findAll();
-    res.render('admin/userList', { users });
+    res.render('users', { users });
   } catch (error) {
     console.error(error);
-    res.status(500).render('errors/500', {
-      status: "Failed",
-      message: "Failed to get users data",
+    return res.status(500).json({
+      status: "Fail",
+      message: error.message,
       isSuccess: false,
-      error: error.message
+      data: null,
     });
+  }
+}
+
+async function getUserbyId(req, res) {
+  try {
+      const id = req.params.id;
+
+      // Ambil data user berdasarkan ID
+      const user = await User.findByPk(id);
+
+      // Jika user tidak ditemukan
+      if (!user) {
+        return res.status(404).json({
+          status: "Fail",
+          message: "User not found",
+          isSuccess: false,
+          data: null,
+        });
+      }
+
+      // Render detail user tanpa cek role
+      res.render('users/detail', { user }); 
+  } catch (error) {
+      console.error(error); // Log kesalahan untuk debugging
+      res.status(500).json({
+          status: "Failed",
+          message: error.message,
+          isSuccess: false,
+          error: error.message
+      });
   }
 }
 
@@ -116,4 +146,5 @@ module.exports = {
   readAllUsers,
   createUser,
   updateUser,
+  getUserbyId,
 };

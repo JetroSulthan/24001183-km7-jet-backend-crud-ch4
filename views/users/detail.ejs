@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pengguna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome untuk ikon -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        h5.card-title {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        td strong {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Detail Pengguna</h5>
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="w-25"><strong>ID Pengguna</strong></td>
+                            <td class="w-75"><%= user.id %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nama</strong></td>
+                            <td><%= user.name %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td><%= user.email %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Telepon</strong></td>
+                            <td><%= user.phone %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alamat</strong></td>
+                            <td><%= user.alamat %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Foto Profil</strong></td>
+                            <td>
+                                <img src="<%= user.foto_profil ? user.foto_profil : '/path/to/default/image.jpg' %>" alt="Foto Profil" style="width: 100px; height: 100px; border-radius: 50%;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/users" class="btn btn-back">Kembali ke Daftar Pengguna</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
