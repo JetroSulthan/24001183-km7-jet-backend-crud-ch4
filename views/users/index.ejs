@@ -1,0 +1,122 @@
+<div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Daftar Pengguna</h5>
+            <!-- Table with stripped rows -->
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Telepon</th>
+                  <th scope="col">Alamat</th>
+                  <th scope="col">Foto Profil</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                  <td><%= user.id %></td>
+                  <td><%= user.name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.phone %></td>
+                  <td><%= user.alamat %></td>
+                  <td>
+                    <img
+                      src="<%= user.foto_profil ? user.foto_profil : '/path/to/default/image.jpg' %>"
+                      alt="Foto Profil"
+                      width="100"
+                    />
+                  </td>
+                  <td>
+                    <a
+                      href="/dashboard/users/detail/<%= user.id %>"
+                      class="btn btn-primary"
+                    >
+                      <span
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="1.0em"
+                          height="1.5em"
+                          viewBox="0 0 24 24"
+                        >
+                          <g
+                            fill="white"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                          >
+                            <path
+                              d="M8.25 12a3.75 3.75 0 1 1 7.5 0a3.75 3.75 0 0 1-7.5 0M12 9.75a2.25 2.25 0 1 0 0 4.5a2.25 2.25 0 0 0 0-4.5"
+                            />
+                            <path
+                              d="M4.323 10.646c-.419.604-.573 1.077-.573 1.354s.154.75.573 1.354c.406.583 1.008 1.216 1.77 1.801C7.62 16.327 9.713 17.25 12 17.25s4.38-.923 5.907-2.095c.762-.585 1.364-1.218 1.77-1.801c.419-.604.573-1.077.573-1.354s-.154-.75-.573-1.354c-.406-.583-1.008-1.216-1.77-1.801C16.38 7.673 14.287 6.75 12 6.75s-4.38.923-5.907 2.095c-.762.585-1.364 1.218-1.77 1.801m.856-2.991C6.91 6.327 9.316 5.25 12 5.25s5.09 1.077 6.82 2.405c.867.665 1.583 1.407 2.089 2.136c.492.709.841 1.486.841 2.209s-.35 1.5-.841 2.209c-.506.729-1.222 1.47-2.088 2.136c-1.73 1.328-4.137 2.405-6.821 2.405s-5.09-1.077-6.82-2.405c-.867-.665-1.583-1.407-2.089-2.136C2.6 13.5 2.25 12.723 2.25 12s.35-1.5.841-2.209c.506-.729 1.222-1.47 2.088-2.136"
+                            />
+                          </g></svg
+                      ></span>
+                    </a>
+                    <a
+                      href="/dashboard/users/edit/<%= user.id %>"
+                      class="btn btn-warning"
+                    >
+                      <span
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="1.0em"
+                          height="1.5em"
+                          viewBox="0 0 24 24"
+                        >
+                          <g
+                            fill="none"
+                            stroke="white"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                          >
+                            <path
+                              d="M19.09 14.441v4.44a2.37 2.37 0 0 1-2.369 2.369H5.12a2.37 2.37 0 0 1-2.369-2.383V7.279a2.356 2.356 0 0 1 2.37-2.37H9.56"
+                            />
+                            <path
+                              d="M6.835 15.803v-2.165c.002-.357.144-.7.395-.953l9.532-9.532a1.36 1.36 0 0 1 1.934 0l2.151 2.151a1.36 1.36 0 0 1 0 1.934l-9.532 9.532a1.36 1.36 0 0 1-.953.395H8.197a1.36 1.36 0 0 1-1.362-1.362M19.09 8.995l-4.085-4.086"
+                            />
+                          </g></svg
+                      ></span>
+                    </a>
+                    <a
+                      href="dashboard/users/delete/<%= user.id %>"
+                      class="btn btn-danger"
+                      onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')"
+                    >
+                      <span
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="1.0em"
+                          height="1.5em"
+                          viewBox="0 0 32 32"
+                        >
+                          <path
+                            fill="white"
+                            d="M13.5 6.5V7h5v-.5a2.5 2.5 0 0 0-5 0m-2 .5v-.5a4.5 4.5 0 1 1 9 0V7H28a1 1 0 1 1 0 2h-1.508L24.6 25.568A5 5 0 0 1 19.63 30h-7.26a5 5 0 0 1-4.97-4.432L5.508 9H4a1 1 0 0 1 0-2zM9.388 25.34a3 3 0 0 0 2.98 2.66h7.263a3 3 0 0 0 2.98-2.66L24.48 9H7.521zM13 12.5a1 1 0 0 1 1 1v10a1 1 0 1 1-2 0v-10a1 1 0 0 1 1-1m7 1a1 1 0 1 0-2 0v10a1 1 0 1 0 2 0z"
+                          /></svg
+                      ></span>
+                    </a>
+                  </td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+            <a href="/dashboard/users/create" class="btn btn-primary mt-4"
+              >Tambah Pengguna</a
+            >
+            <!-- End Table with stripped rows -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- End #main -->

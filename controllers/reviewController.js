@@ -1,9 +1,10 @@
-const { Review } = require("../models");
-const { Rental } = require("../models");
+const { Review, Rental, Car, User } = require('../models');
 
 const getReviews = async (req, res) => {
     try{
-        const reviews = await Review.findAll()
+        const reviews = await Review.findAll({
+            order: [['id', 'ASC']]
+        })
         console.log(reviews)
         res.render("reviews/index", {
             title: "Reviews",
@@ -102,6 +103,41 @@ const deleteReviews = async (req, res) => {
     }
 }
 
+const getReviewsById = async (req, res) => {
+    const id = req.params.id
+    try{
+        const review = await Review.findByPk(id, {
+            include: [
+                {
+                    model: Rental,
+                    include: [
+                        {
+                            model: Car,
+                            attributes: ['model', 'foto_mobil']
+                        },
+                        {
+                            model: User,
+                            attributes: ['name']
+                        }
+                    ],
+                    attributes: ['total_harga']
+                }
+            ]
+        })
+
+        if(!review){
+            return res.status(404).send("Failed get review")
+        }
+
+        res.render('reviews/detail' , { review })
+    }
+    catch(error){
+        res.status(500).send({ 
+            message: error.message 
+        })
+    }
+}
+
 
 module.exports = {
     getReviews,
@@ -109,5 +145,6 @@ module.exports = {
     createPage,
     updateReview,
     updatePage,
-    deleteReviews
+    deleteReviews,
+    getReviewsById
 };

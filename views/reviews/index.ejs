@@ -4,7 +4,7 @@
     <table class="table table-bordered mb-5">
         <thead>
             <tr>
-                <th class="text-center">Id</th>
+                <th class="text-center">Nomor</th>
                 <th class="text-center">Komentar</th>
                 <th class="text-center">Rating</th>
                 <th class="text-center">Tanggal Review</th>
@@ -13,10 +13,10 @@
         </thead>
 
         <tbody>
-            <% reviews.map((review) => { %>
+            <% reviews.map((review, index) => { %>
                 <tr>
                     <td class="text-center">
-                        <%= review.id %>
+                        <%= index+1 %>
                     </td>
                     <td>
                         <%= review.komentar %>
@@ -28,6 +28,7 @@
                         <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                     </td>
                     <td class="text-center">
+                        <a class="btn btn-primary ri-eye-line" href="/dashboard/reviews/detail/<%= review.id %>">detail</a>
                         <a class="btn btn-warning ri-file-edit-line" href="reviews/update-review/<%= review.id %>">edit</a>
                         <a class="btn btn-danger ri-delete-bin-2-line" href="/dashboard/reviews/delete/<%= review.id %>">delete</a>
                     </td>
