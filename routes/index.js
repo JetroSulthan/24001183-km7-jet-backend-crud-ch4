@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 //test controller
-const indexController = require("../controllers/indexController");
+const { systemController } = require("../controllers");
 
 //test route
-router.use('/test', indexController.healthCheck)
+router.use('/health-check', systemController.healthCheck)
 
 // Import semua route
 const usersRoute = require('./usersRoute');
