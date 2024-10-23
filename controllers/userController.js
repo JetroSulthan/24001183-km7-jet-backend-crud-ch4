@@ -179,6 +179,29 @@ const updateUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).render("errors/404", { layout: "layout" });
+    }
+
+    await user.destroy();
+
+    res.redirect("/dashboard/users");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).render("errors/500", { layout: "layout" });
+  }
+};
+
 module.exports = {
   readAllUsers,
   editPage,
@@ -186,4 +209,5 @@ module.exports = {
   createUser,
   updateUser,
   getUserbyId,
+  deleteUser,
 };

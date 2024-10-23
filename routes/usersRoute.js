@@ -12,5 +12,6 @@ router.get("/create", userController.createPage);
 router.post("/create", upload.single("foto_profil"), userController.createUser);
 router.get("/edit/:id", userController.editPage);
 router.post("/:id", upload.single("foto_profil"), userController.updateUser);
+router.get("/delete/:id", userController.deleteUser);
 
 module.exports = router;
