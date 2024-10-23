@@ -7,7 +7,7 @@
                 <div class="row mb-3">
                     <label for="rental" class="col-sm-2 col-form-label">Rental</label>
                     <div class="col-sm-10">
-                        <input type="number" id="rental_id" name="rental_id" value="<%= review.rental_id %>" placeholder="Rental ID" class="form-control" disabled>
+                        <input type="text" id="rental_id" name="rental_id" value="<%= rental.id %>. <%= rental.Car.model %> - <%= rental.User.name %>" placeholder="Rental ID" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">

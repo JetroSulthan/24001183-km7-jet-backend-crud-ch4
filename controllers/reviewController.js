@@ -75,9 +75,16 @@ async function updateReview(req, res) {
 async function updatePage(req, res) {
     try {
         const { id } = req.params;
-        const review = await Review.findByPk(id);
-        const rentals = await Rental.findAll();
-        res.render("reviews/update-review", { layout: 'layout', review, rentals });
+        const review = await Review.findByPk(id,{
+            include: {
+                model: Rental,
+                include: [
+                    {model: Car, attributes: ["model"]},
+                    {model: User, attributes: ["name"]},
+                ]
+            }
+        });
+        res.render("reviews/update-review", { layout: 'layout', review, rental: review.Rental });
     } catch (error) {
         res.status(500).json({
             status: "Failed",
