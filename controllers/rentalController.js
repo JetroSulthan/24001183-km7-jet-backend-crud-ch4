@@ -25,14 +25,12 @@ const imagekit = require("../lib/imagekit");
 async function createRentals(req, res) {
     const { car_id, user_id, tgl_peminjaman, tgl_pengembalian, total_harga, status } = req.body;
     try {
-        // Check if the car is still available
         const car = await Car.findOne({ where: { id: car_id} });
 
         if (!car) {
             return res.status(400).json({ message: 'Car is not available for rental.' });
         }
 
-        // Insert the rental into the rentals table
         const newRental = {
             user_id,
             car_id,
@@ -54,18 +52,16 @@ async function createRentals(req, res) {
 };
 
 async function updateRental(req, res) {
-    const rental_id = req.params.id; // Assuming rental_id is passed as a URL parameter
+    const rental_id = req.params.id;
     const { car_id, user_id, tgl_peminjaman, tgl_pengembalian, total_harga, status } = req.body;
 
     try {
-        // Check if the rental exists
         const rental = await Rental.findOne({ where: { id: rental_id } });
 
         if (!rental) {
             return res.status(404).json({ message: 'Rental not found.' });
         }
 
-        // If a new car_id is provided, check if the new car is available
         if (car_id) {
             const car = await Car.findOne({ where: { id: car_id } });
             if (!car) {
@@ -73,7 +69,6 @@ async function updateRental(req, res) {
             }
         }
 
-        // Update rental fields with the new data if provided
         const updatedRentalData = {
             user_id: user_id || rental.user_id,
             car_id: car_id || rental.car_id,
@@ -83,7 +78,6 @@ async function updateRental(req, res) {
             status: status || rental.status,
         };
 
-        // Update the rental in the database
         await rental.update(updatedRentalData);
 
         res.redirect('/dashboard/rentals')
@@ -100,8 +94,6 @@ async function updatePage(req, res) {
     const rental_id = req.params.id;
 
     try {
-        console.log("ok anjim");
-        // Fetch rental by ID
         const rental = await Rental.findOne({ 
             where: { id: rental_id }
         });
@@ -110,7 +102,6 @@ async function updatePage(req, res) {
             return res.status(404).render('errors/404.html', { message: 'Rental not found.', isSuccess: false });
         }
         
-        // Render the view, passing the rental data
         res.render('rentals/update', { rental });
     } catch (error) {
         res.status(500).render('errors/500', { message: error.message, isSuccess: false });
@@ -119,11 +110,9 @@ async function updatePage(req, res) {
 
 async function createPage (req, res) {
     try {
-        // Fetch all available cars
         const cars = await Car.findAll({ where: { status: "tersedia" } });
         const users = await User.findAll()
         
-        // Render the 'cars' view and pass the cars data to it
         res.render('rentals/create-rentals.ejs', {cars, users });
     } catch (error) {
         console.error(error);
