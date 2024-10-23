@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Pengguna</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- Font Awesome untuk ikon -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .card {
+        margin-top: 20px; /* Jarak atas untuk setiap card */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .card-body {
+        padding: 20px;
+      }
+      .card-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+      td img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .btn {
+        display: inline-block;
+        padding: 8px 12px;
+        margin-top: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        transition: background-color 0.3s;
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+      .btn-add {
+        background-color: #28a745;
+      }
+      .btn-add:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Daftar Pengguna</h5>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Telepon</th>
+                <th>Alamat</th>
+                <th>Foto Profil</th>
+                <th>Detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(user => { %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone %></td>
+                <td><%= user.alamat %></td>
+                <td>
+                  <img
+                    src="<%= user.foto_profil ? user.foto_profil : '/path/to/default/image.jpg' %>"
+                    alt="Foto Profil"
+                  />
+                </td>
+                <td>
+                  <a
+                    href="/dashboard/users/detail/<%= user.id %>"
+                    class="btn btn-detail"
+                  >
+                    <i class="fas fa-eye"></i> Detail
+                  </a>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <a href="/dashboard/users/create" class="btn btn-add"
+            >Tambah Pengguna</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

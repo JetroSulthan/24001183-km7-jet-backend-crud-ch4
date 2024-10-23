@@ -1,0 +1,72 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Detail Rental</h5>
+        <table class="table table-sm table-borderless">
+            <tbody>
+                <tr>
+                    <td class="w-25"><strong>Status</strong></td>
+                    <td class="w-75"><strong>:   </strong>
+                        <span class="badge 
+                        <%= rental.status === 'selesai' ? 'bg-success' : '' %>
+                        <%= rental.status === 'aktif' ? 'bg-warning' : '' %>
+                        <%= rental.status === 'canceled' ? 'bg-danger' : '' %>">
+                        <%= rental.status %>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>ID Rental</strong></td>
+                    <td><strong>:   </strong><%= rental.id %></td>
+                </tr>
+                <tr>
+                    <td><strong>Tanggal Peminjaman</strong></td>
+                    <td><strong>:   </strong><%= new Date(rental.tgl_peminjaman).toLocaleDateString() %></td>
+                </tr>
+                <tr>
+                    <td><strong>Tanggal Pengembalian</strong></td>
+                    <td><strong>:   </strong><%= new Date(rental.tgl_pengembalian).toLocaleDateString() %></td>
+                </tr>
+                <tr>
+                    <td><strong>Total Harga</strong></td>
+                    <td><strong>:   </strong>Rp <%= rental.total_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %></td>
+                </tr>
+                <tr>
+                    <td><strong>Nama Penyewa</strong></td>
+                    <td><strong>:   </strong><%= rental.User.name %></td>
+                </tr>
+                <tr>
+                    <td><strong>Email Penyewa</strong></td>
+                    <td><strong>:   </strong><%= rental.User.email %></td>
+                </tr>
+                <tr>
+                    <td><strong>Model Mobil</strong></td>
+                    <td><strong>:   </strong><%= rental.Car.model %></td>
+                </tr>
+                <tr>
+                    <td><strong>No Plat Mobil</strong></td>
+                    <td><strong>:   </strong><%= rental.Car.no_plat %></td>
+                </tr>
+                <tr>
+                    <td><strong>Rating</strong></td>
+                    <td><strong>:   </strong>
+                        <% if (rental.Reviews.length > 0) { %>
+                            <% const rating = rental.Reviews[0].rating; %>
+                            <% for (let i = 1; i <= 5; i++) { %>
+                                <i class="fas fa-star <%= i <= rating ? 'text-warning' : 'text-muted' %>"></i>
+                            <% } %>
+                            <span>(<%= rating %>)</span>
+                        <% } else { %>
+                            <span>Belum ada rating</span>
+                        <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Komentar</strong></td>
+                    <td><strong>:   </strong>
+                        <%= rental.Reviews.length > 0 ? rental.Reviews[0].komentar : 'Belum ada komentar' %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
