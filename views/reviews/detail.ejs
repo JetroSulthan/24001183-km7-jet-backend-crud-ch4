@@ -1,0 +1,39 @@
+<a class="btn btn-primary ri-arrow-go-back-fill" href="/dashboard/reviews"> Back</a>
+
+<div class="card my-5 border-0 shadow-lg rounded-4" style="background: #fff;">
+    <div class="row g-0">
+        <div class="col-md-4 d-flex align-items-center justify-content-center" style="background: #fff; border-top-left-radius: 1.5rem; border-bottom-left-radius: 1.5rem; padding: 15px;">
+            <img src="<%= review.Rental.Car.foto_mobil %>" alt="Car image" class="img-fluid" style="border-radius: 15px;">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title fw-bold mb-0 pb-0">Review for <%= review.Rental.Car.model %></h5>
+
+                <p class="mt-0">by <%= review.Rental.User.name %></p>
+                
+                <p class="text-muted mb-1 fw-bold" style="font-size: 1.1em;">Rental Details</p>
+                
+                <p class="mb-2">
+                    <strong>Rental Price:</strong> 
+                    <span class="badge bg-success text-light">
+                        Rp <%= parseInt(review.Rental.total_harga).toLocaleString('id-ID') %>
+                    </span>
+                </p>
+                
+                <p class="mb-2">
+                    <strong>Review Comment:</strong> <%= review.komentar %>
+                </p>
+
+                <p class="mb-2">
+                    <strong>Rating:</strong> 
+                    <%= review.rating %> <i class="bi bi-star-fill text-warning"></i>
+                </p>
+
+                <p class="mb-4">
+                    <strong>Review Date:</strong> 
+                    <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
