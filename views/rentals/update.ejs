@@ -1,14 +1,6 @@
 <div class="container">
-    <h1 class="mt-4">Update Rental Information</h1>
-    
-    <!-- Display error or success messages -->
-    <!-- <% if (typeof message !== 'undefined') { %>
-        <div class="alert <%= isSuccess ? 'alert-success' : 'alert-danger' %>" role="alert">
-            <%= message %>
-        </div>
-    <% } %> -->
-
-    <!-- Rental Update Form -->
+    <h1 class="mt-4">Update Car Rental</h1>
+ 
     <form action="/dashboard/rentals/update/<%= rental.id %>" method="POST">
         <div class="mb-3">
             <label for="car_id" class="form-label">Car ID</label>
