@@ -87,9 +87,10 @@
                       ></span>
                     </a>
                     <a
-                      href="dashboard/users/delete/<%= user.id %>"
+                      href="#"
                       class="btn btn-danger"
-                      onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')"
+                      id="delete"
+                      onclick="confirmDelete(<%= user.id %>, '<%= user.name %>')"
                     >
                       <span
                         ><svg
@@ -109,7 +110,11 @@
                 <% }); %>
               </tbody>
             </table>
-            <a href="/dashboard/users/create" class="btn btn-primary mt-4"
+            <a
+              href="#"
+              class="btn btn-primary mt-4"
+              id="create"
+              onclick="confirmCreate()"
               >Tambah Pengguna</a
             >
             <!-- End Table with stripped rows -->

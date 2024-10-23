@@ -4,34 +4,48 @@ document
     e.preventDefault();
 
     const form = e.target;
+    const userName = form.name.value;
     const formData = new FormData(form);
 
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: formData,
-      });
+    const result = await Swal.fire({
+      title: "Apakah Anda yakin?",
+      text: `Anda ingin memperbarui informasi pengguna: ${userName}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, perbarui!",
+      cancelButtonText: "Batal",
+    });
 
-      if (response.ok) {
-        Swal.fire({
-          icon: "success",
-          title: "User updated successfully!",
-          text: "The user information has been successfully updated.",
-        }).then(() => {
-          window.location.href = "/dashboard/users";
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
         });
-      } else {
+
+        if (response.ok) {
+          Swal.fire({
+            icon: "success",
+            title: "Pengguna berhasil diperbarui!",
+            text: "Informasi pengguna telah berhasil diperbarui.",
+          }).then(() => {
+            window.location.href = "/dashboard/users";
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Pembaharuan gagal",
+            text: "Ada masalah dalam memperbarui informasi pengguna.",
+          });
+        }
+      } catch (error) {
         Swal.fire({
           icon: "error",
-          title: "Update failed",
-          text: "There was a problem updating the user information.",
+          title: "Kesalahan server",
+          text: "Terjadi kesalahan pada server.",
         });
       }
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Server error",
-        text: "Something went wrong with the server.",
-      });
     }
   });
