@@ -8,11 +8,9 @@
                     <label for="rental" class="col-sm-2 col-form-label">Rental</label>
                     <div class="col-sm-10">
                     <select id="rental_id" name="rental_id" class="form-select" aria-label="Default select example" required>
-                        <% for(var i=0; i < rentals.length; i++) { 
-                            var car = cars.find(car => car.id === rentals[i].car_id);
-                            var user = users.find(user => user.id === rentals[i].user_id);%>
-                            <option value="<%= rentals[i].id %>">
-                                <%= rentals[i].id %>. <%= car ? car.model : 'Unknown Car' %> - <%= user ? user.name : 'Unknown User' %>
+                        <% for(var i=0; i < rental.length; i++) { %>
+                            <option value="<%= rental[i].id %>">
+                                <%= rental[i].id %>. <%= rental[i].Car ? rental[i].Car.model : 'Unknown Car' %> - <%= rental[i].User ? rental[i].User.name : 'Unknown User' %>
                             </option>
                         <% } %>
                     </select>
