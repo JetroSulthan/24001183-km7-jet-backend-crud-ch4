@@ -1,39 +1,52 @@
-<a class="btn btn-primary ri-arrow-go-back-fill" href="/dashboard/reviews"> Back</a>
-
-<div class="card my-5 border-0 shadow-lg rounded-4" style="background: #fff;">
+<div class="card border-0 shadow-lg p-4" style="background: #fff;">
     <div class="row g-0">
-        <div class="col-md-4 d-flex align-items-center justify-content-center" style="background: #fff; border-top-left-radius: 1.5rem; border-bottom-left-radius: 1.5rem; padding: 15px;">
-            <img src="<%= review.Rental.Car.foto_mobil %>" alt="Car image" class="img-fluid" style="border-radius: 15px;">
+        <div class="col-md-5 d-flex align-items-center justify-content-center"
+            style="background: #fff; border-top-left-radius: 1.5rem; border-bottom-left-radius: 1.5rem; padding: 15px;">
+            <img src="<%= review.Rental.Car.foto_mobil %>" alt="Car image" class="img-fluid"
+                style="border-radius: 15px;">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card-body">
-                <h5 class="card-title fw-bold mb-0 pb-0">Review for <%= review.Rental.Car.model %></h5>
+                <h5 class="card-title fw-bold mb-0 pb-0">Review for <%= review.Rental.Car.model %>
+                </h5>
 
-                <p class="mt-0">by <%= review.Rental.User.name %></p>
-                
+                <p class="mt-0">by <%= review.Rental.User.name %>
+                </p>
+
                 <p class="text-muted mb-1 fw-bold" style="font-size: 1.1em;">Rental Details</p>
-                
+
                 <p class="mb-2">
-                    <strong>Rental Price:</strong> 
+                    <strong>Rental Price:</strong>
                     <span class="badge bg-success text-light">
                         Rp <%= parseInt(review.Rental.total_harga).toLocaleString('id-ID') %>
                     </span>
                 </p>
-                
+
                 <p class="mb-2">
-                    <strong>Review Comment:</strong> <%= review.komentar %>
+                    <strong>Review Comment:</strong>
+                    <%= review.komentar %>
                 </p>
 
                 <p class="mb-2">
-                    <strong>Rating:</strong> 
+                    <strong>Rating:</strong>
                     <%= review.rating %> <i class="bi bi-star-fill text-warning"></i>
                 </p>
 
                 <p class="mb-4">
-                    <strong>Review Date:</strong> 
-                    <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                    <strong>Review Date:</strong>
+                    <%= new Date(review.tgl_review).toLocaleDateString('id-ID', { year: 'numeric' , month: 'long' ,
+                        day: 'numeric' }) %>
                 </p>
             </div>
         </div>
     </div>
+    <div class="mt-4">
+        <a href="/dashboard/Reviews ">
+            <button class="btn btn-primary shadow-sm d-flex gap-1 align-items-center p-2"><span><svg
+                        xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                        <path fill="white" d="M8 7v4L2 6l6-5v4h5a8 8 0 1 1 0 16H4v-2h9a6 6 0 0 0 0-12z" />
+                    </svg></span>Back</button>
+        </a>
+    </div>
+
 </div>
