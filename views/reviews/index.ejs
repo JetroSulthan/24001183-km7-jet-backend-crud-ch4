@@ -30,8 +30,8 @@
                     <td class="text-center">
                         <a class="btn btn-primary ri-eye-line" href="/dashboard/reviews/detail/<%= review.id %>">detail</a>
                         <a class="btn btn-warning ri-file-edit-line" href="reviews/update-review/<%= review.id %>">edit</a>
-                        <a class="btn btn-danger ri-delete-bin-2-line" href="/dashboard/reviews/delete/<%= review.id %>">delete</a>
-                    </td>
+                        <button class="btn btn-danger ri-delete-bin-2-line delete-review" data-id="<%= review.id %>">delete</button>
+                    </td>                      
                 </tr>
                 <% }) %>
             </tbody>

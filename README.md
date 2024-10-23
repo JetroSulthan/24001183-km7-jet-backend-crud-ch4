@@ -71,65 +71,76 @@ Untuk memulai server dalam mode pengembangan:
 npm run dev
 ```
 
-API akan tersedia di `http://localhost:3000`.
+## 📂 Route
 
-## 📂 Endpoint API
+### Health Check
 
-### Autentikasi
+| Method | Route                           | Deskripsi                          |
+|--------|---------------------------------|------------------------------------|
+| GET    | `/dashboard/health-check`       | Memeriksa status kesehatan server  |
 
-| Method | Endpoint               | Deskripsi                          |
-|--------|------------------------|------------------------------------|
-| POST   | `/dashboard/auth/register` | Registrasi pengguna baru           |
+### Manajemen Pengguna (CRUD Users)
 
-### Manajemen Pengguna (CRUD User)
-
-| Method | Endpoint               | Deskripsi                          |
-|--------|------------------------|------------------------------------|
-| GET    | `/dashboard/users`         | Mengambil semua pengguna           |
-| GET    | `/dashboard/users/:id`     | Mengambil detail pengguna          |
-| POST   | `/dashboard/users`         | Menambahkan pengguna baru          |
-| PUT    | `/dashboard/users/:id`     | Memperbarui data pengguna          |
+| Method | Route                                     | Deskripsi                          |
+|--------|-------------------------------------------|------------------------------------|
+| GET    | `/dashboard/users/`                      | Mengambil semua data pengguna      |
+| GET    | `/dashboard/users/detail/:id`            | Mengambil detail pengguna berdasarkan ID |
+| GET    | `/dashboard/users/create`                | Menampilkan form tambah pengguna   |
+| POST   | `/dashboard/users/`                      | Menambah pengguna baru beserta foto profil |
+| GET    | `/dashboard/users/edit/:id`              | Menampilkan form edit pengguna     |
+| POST   | `/dashboard/users/:id`                   | Memperbarui data pengguna          |
+| GET    | `/dashboard/users/delete/:id`            | Menghapus pengguna tertentu        |
 
 ### Manajemen Mobil (CRUD Cars)
 
-| Method | Endpoint               | Deskripsi                          |
-|--------|------------------------|------------------------------------|
-| GET    | `/dashboard/cars`          | Mengambil semua data mobil         |
-| GET    | `/dashboard/cars/:id`      | Mengambil detail mobil tertentu    |
-| POST   | `/dashboard/cars`          | Menambahkan mobil baru beserta gambar (multiple files) |
-| PUT    | `/dashboard/cars/:id`      | Memperbarui data mobil             |
+| Method | Endpoint                                 | Deskripsi                          |
+|--------|-------------------------------------------|------------------------------------|
+| GET    | `/dashboard/cars/`                       | Mengambil semua data mobil         |
+| GET    | `/dashboard/cars/detail/:id`             | Mengambil detail mobil berdasarkan ID |
+| GET    | `/dashboard/cars/create`                 | Menampilkan form tambah mobil      |
+| POST   | `/dashboard/cars/`                       | Menambah mobil baru beserta gambar |
+| GET    | `/dashboard/cars/edit/:id`               | Menampilkan form edit mobil        |
+| POST   | `/dashboard/cars/edit/:id`               | Memperbarui data mobil beserta gambar |
+| GET    | `/dashboard/cars/delete/:id`             | Menghapus mobil tertentu           |
 
-### Manajemen Rental Mobil (CRUD Rentals)
+### Manajemen Rental (CRUD Rentals)
 
-| Method | Endpoint               | Deskripsi                          |
-|--------|------------------------|------------------------------------|
-| GET    | `/dashboard/rentals`       | Mengambil semua data rental        |
-| GET    | `/dashboard/rentals/:id`   | Mengambil detail rental tertentu   |
-| POST   | `/dashboard/rentals`       | Menambahkan data rental baru       |
-| PUT    | `/dashboard/rentals/:id`   | Memperbarui data rental            |
+| Method | Endpoint                                 | Deskripsi                          |
+|--------|-------------------------------------------|------------------------------------|
+| GET    | `/dashboard/rentals/`                    | Mengambil semua data rental        |
+| GET    | `/dashboard/rentals/:id`                 | Mengambil detail rental berdasarkan ID |
+| GET    | `/dashboard/rentals/create`              | Menampilkan form tambah rental     |
+| POST   | `/dashboard/rentals/create`              | Menambah rental baru               |
+| GET    | `/dashboard/rentals/update/:id`          | Menampilkan form edit rental       |
+| POST   | `/dashboard/rentals/update/:id`          | Memperbarui data rental            |
+| GET    | `/dashboard/rentals/delete/:id`          | Menghapus rental tertentu          |
 
-### Review Mobil (CRUD Reviews)
+### Manajemen Review (CRUD Reviews)
 
-| Method | Endpoint               | Deskripsi                          |
-|--------|------------------------|------------------------------------|
-| GET    | `/dashboard/reviews`       | Mengambil semua review             |
-| GET    | `/dashboard/reviews/:id`   | Mengambil detail review tertentu   |
-| POST   | `/dashboard/reviews`       | Menambahkan review baru            |
-| PUT    | `/dashboard/reviews/:id`   | Memperbarui review                 |
-| DELETE | `/dashboard/reviews/:id`   | Menghapus review                   |
+| Method | Endpoint                                 | Deskripsi                          |
+|--------|-------------------------------------------|------------------------------------|
+| GET    | `/dashboard/reviews/`                    | Mengambil semua data review        |
+| GET    | `/dashboard/reviews/detail/:id`          | Mengambil detail review berdasarkan ID |
+| GET    | `/dashboard/reviews/create-review`       | Menampilkan form tambah review     |
+| POST   | `/dashboard/reviews/create-review`       | Menambah review baru               |
+| GET    | `/dashboard/reviews/update-review/:id`   | Menampilkan form edit review       |
+| POST   | `/dashboard/reviews/update-review/:id`   | Memperbarui data review            |
+| GET    | `/dashboard/reviews/delete/:id`          | Menghapus review tertentu          |
+
 
 ## 🤝 Kontribusi
 
 Daftar Anggota Dalam Repository Ini
 
-1. **[Wahyu Anang Zulfikri](https://github.com/wahyuanang)** Read cars (admin, customer) & Detail cars (admin, customer)
-2. **[Rafly Aziz Abdillah](https://github.com/raflytch)** Register/create user (customer) & Update user (customer)
-3. **[Ahmad Alif Ramadhan](https://github.com/neobitose)** Create cars (admin) & Update cars (admin)
-4. **[Gede Brandon Abelio Ogaden](https://github.com/OddDuckkk)** Read peminjaman (admin,customer) & Retail peminjaman (admin, customer)
-5. **[Nita Fitrotul Mar'ah](https://github.com/Nitaa1904)** Read user (admin) & Detail user (admin, customer)
-6. **[Jetro Sulthan Fatih Nurrafi](https://github.com/JetroSulthan)** Create peminjaman (customer) & Update peminjaman (customer)
-7. **[Tegar Alfa Rizzi](https://github.com/TegarAlfaR)** Read review (admin, customer) & Delete review (customer)
-8. **[Muhammad Rifqi Tri Afandi](https://github.com/RifqiAfandi)** Create review (customer) & Update review (customer)
+1. **[Nita Fitrotul Mar'ah](https://github.com/Nitaa1904)** Read user, Detail user, Delete user
+2. **[Rafly Aziz Abdillah](https://github.com/raflytch)** create user, Update user
+3. **[Wahyu Anang Zulfikri](https://github.com/wahyuanang)** Read cars, Detail cars, Delete cars
+4. **[Ahmad Alif Ramadhan](https://github.com/neobitose)** Create cars, Update cars
+5. **[Gede Brandon Abelio Ogaden](https://github.com/OddDuckkk)** Read rentals, Detail rentals, Delete rentals 
+6. **[Jetro Sulthan Fatih Nurrafi](https://github.com/JetroSulthan)** Create rentals, Update rentals
+7. **[Tegar Alfa Rizzi](https://github.com/TegarAlfaR)** Read reviews, Detail reviews, Delete reviews
+8. **[Muhammad Rifqi Tri Afandi](https://github.com/RifqiAfandi)** Create reviews & Update reviews
+
 ## Teknologi yang Digunakan
 
 - **Node.js**: Runtime untuk backend.

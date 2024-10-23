@@ -8,6 +8,7 @@ router.get("/update/:id", rentalController.updatePage )
 router.post("/create", rentalController.createRentals )
 router.post("/update/:id", rentalController.updateRental )
 router.get("/", rentalController.getAllRentals);
-router.get("/:id", rentalController.getRentalById);
+router.get("/detail/:id", rentalController.getRentalById);
+router.get("/delete/:id", rentalController.deleteRental);
 
 module.exports = router;
