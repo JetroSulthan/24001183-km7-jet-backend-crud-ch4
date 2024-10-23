@@ -41,7 +41,9 @@ async function createReview(req, res) {
 async function createPage(req, res) {
     try {
         const rentals = await Rental.findAll();
-        res.render("reviews/create-review", { layout: 'layout', rentals});
+        const users = await User.findAll();
+        const cars = await Car.findAll();
+        res.render("reviews/create-review", { layout: 'layout', rentals, users, cars});
     } catch (error) {
         res.status(500).json({
             status: "Failed",
